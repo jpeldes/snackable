@@ -1,17 +1,29 @@
 import Link from "next/link";
 
-const FileListNavBtn = ({ offset, children, disabled }) =>
+const FileListNavBtn = ({
+  filter,
+  offset,
+  children,
+  disabled,
+  color = "bg-gray-500"
+}) =>
   disabled ? (
     <a className="cursor-not-allowed bg-gray-400 rounded text-white p-2 m-2">
       {children}
     </a>
   ) : (
-    <Link href={`/files?offset=${offset}`} as="/files">
-      <a className={`bg-gray-500 rounded text-white p-2 m-2`}>{children}</a>
+    <Link href={{ pathname: "/files", query: { filter, offset } }} as="/files">
+      <a className={`${color} rounded text-white p-2 m-2`}>{children}</a>
     </Link>
   );
 
-export default ({ files, offset }) => (
+const FileListFilterBtn = ({ offset, filter }) => (
+  <FileListNavBtn offset={offset} filter={filter} color="bg-blue-500">
+    {filter}
+  </FileListNavBtn>
+);
+
+export default ({ files, offset, filter }) => (
   <table className="border-collapse border-2 border-gray-500">
     <thead>
       <tr>
@@ -41,13 +53,26 @@ export default ({ files, offset }) => (
     </tbody>
     <tfoot>
       <tr>
-        <td colSpan="2" className="text-center py-2">
-          <FileListNavBtn offset={offset - 5} disabled={offset === 0}>
+        <td colSpan="2" className="border border-gray-400 text-center py-2">
+          <FileListNavBtn
+            offset={offset - 5}
+            filter={filter}
+            disabled={offset === 0}
+          >
             Prev
           </FileListNavBtn>
-          <FileListNavBtn offset={offset + 5} disabled={files.length < 5}>
+          <FileListNavBtn offset={offset + 5} filter={filter}>
             Next
           </FileListNavBtn>
+        </td>
+      </tr>
+      <tr>
+        <td colSpan="2" className="border border-gray-400 text-center py-2">
+          <span>Filter:</span>
+          <FileListFilterBtn offset={offset} filter="ALL" />
+          <FileListFilterBtn offset={offset} filter="FINISHED" />
+          <FileListFilterBtn offset={offset} filter="PROCESSING" />
+          <FileListFilterBtn offset={offset} filter="FAILED" />
         </td>
       </tr>
     </tfoot>
