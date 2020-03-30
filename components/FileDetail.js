@@ -1,5 +1,6 @@
 import AudioPlayerView from "./AudioPlayerView";
 import RawDataView from "./RawDataView";
+import FileSegmentView from "./FileSegmentView";
 import Link from "next/link";
 
 export default ({
@@ -7,7 +8,8 @@ export default ({
   fileName,
   mp3Path,
   originalFilepath,
-  seriesTitle
+  seriesTitle,
+  segments
 }) => (
   <div>
     {mp3Path && (
@@ -24,6 +26,8 @@ export default ({
       mp3Path={mp3Path}
       originalFilepath={originalFilepath}
     />
+
+    {segments && segments.length > 0 && <FileSegmentView segments={segments} />}
 
     <Link href="/files">
       <a className="text-sm text-blue-600 inline-block mt-5">
