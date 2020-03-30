@@ -23,7 +23,7 @@ const FileListFilterBtn = ({ offset, filter }) => (
   </FileListNavBtn>
 );
 
-export default ({ files, offset, filter }) => (
+export default ({ files, offset, filter, canSyncMore }) => (
   <table className="border-collapse border-2 border-gray-500">
     <thead>
       <tr>
@@ -61,7 +61,7 @@ export default ({ files, offset, filter }) => (
           >
             Prev
           </FileListNavBtn>
-          <FileListNavBtn offset={offset + 5} filter={filter}>
+          <FileListNavBtn offset={offset + 5} filter={filter} disabled={!canSyncMore}>
             Next
           </FileListNavBtn>
         </td>

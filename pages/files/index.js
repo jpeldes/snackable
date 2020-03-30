@@ -23,7 +23,9 @@ FileListPage.getInitialProps = async ({ query }) => {
     files = files.filter(item => item.processingStatus === filter);
   }
 
-  return { files, offset, filter };
+  const canSyncMore = json.length === 5;
+
+  return { files, offset, filter, canSyncMore };
 };
 
 export default FileListPage;
