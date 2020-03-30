@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default ({ files }) => (
+export default ({ files, offset }) => (
   <table className="border-collapse border-2 border-gray-500">
     <thead>
       <tr>
@@ -28,5 +28,17 @@ export default ({ files }) => (
         );
       })}
     </tbody>
+    <tfoot>
+      <tr>
+        <td colSpan="2" className="text-center py-2">
+          <Link href={`/files?offset=${offset - 5}`}>
+            <a className="bg-gray-500 rounded text-white p-2 m-2">Prev</a>
+          </Link>
+          <Link href={`/files?offset=${offset + 5}`}>
+            <a className="bg-gray-500 rounded text-white p-2 m-2">Next</a>
+          </Link>
+        </td>
+      </tr>
+    </tfoot>
   </table>
 );
