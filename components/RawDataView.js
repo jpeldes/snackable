@@ -20,6 +20,7 @@ export default ({
   originalFilepath
 }) => (
   <div>
+    <h1 className="text-2xl my-6 text-purple-400">Raw data</h1>
     <Row faded>Series title: {seriesTitle || "N/A"}</Row>
     <Row faded>File name: {fileName}</Row>
     <Row faded>File ID: {fileId}</Row>
