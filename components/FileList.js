@@ -1,5 +1,16 @@
 import Link from "next/link";
 
+const FileListNavBtn = ({ offset, children, disabled }) =>
+  disabled ? (
+    <a className="cursor-not-allowed bg-gray-400 rounded text-white p-2 m-2">
+      {children}
+    </a>
+  ) : (
+    <Link href={`/files?offset=${offset}`} as="/files">
+      <a className={`bg-gray-500 rounded text-white p-2 m-2`}>{children}</a>
+    </Link>
+  );
+
 export default ({ files, offset }) => (
   <table className="border-collapse border-2 border-gray-500">
     <thead>
@@ -31,12 +42,12 @@ export default ({ files, offset }) => (
     <tfoot>
       <tr>
         <td colSpan="2" className="text-center py-2">
-          <Link href={`/files?offset=${offset - 5}`} as="/files">
-            <a className="bg-gray-500 rounded text-white p-2 m-2">Prev</a>
-          </Link>
-          <Link href={`/files?offset=${offset + 5}`} as="/files">
-            <a className="bg-gray-500 rounded text-white p-2 m-2">Next</a>
-          </Link>
+          <FileListNavBtn offset={offset - 5} disabled={offset === 0}>
+            Prev
+          </FileListNavBtn>
+          <FileListNavBtn offset={offset + 5} disabled={files.length < 5}>
+            Next
+          </FileListNavBtn>
         </td>
       </tr>
     </tfoot>
