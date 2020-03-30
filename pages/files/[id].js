@@ -3,17 +3,21 @@ import fetch from "isomorphic-unfetch";
 import FilesPage from "../../components/FilesPage";
 import FileDetail from "../../components/FileDetail";
 
-const FileDetailPage = ({ fileId }) => {
+const FileDetailPage = props => {
   return (
     <FilesPage>
-      <FileDetail fileId={fileId} />
+      <FileDetail {...props} />
     </FilesPage>
   );
 };
 
 FileDetailPage.getInitialProps = async ({ req, query }) => {
   const fileId = query.id;
-  return { fileId };
+
+  const resp = await fetch(`http://interview-api.snackable.ai/api/file/details/${fileId}`);
+  const json = await resp.json();
+
+  return { fileId, ...json };
 };
 
 export default FileDetailPage;
