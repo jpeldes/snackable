@@ -8,7 +8,7 @@ const FileListNavBtn = ({
   color = "bg-gray-500"
 }) =>
   disabled ? (
-    <a className="cursor-not-allowed bg-gray-400 rounded text-white p-2 m-2">
+    <a className={`opacity-50 ${color} rounded text-white p-2 m-2`}>
       {children}
     </a>
   ) : (
@@ -17,8 +17,13 @@ const FileListNavBtn = ({
     </Link>
   );
 
-const FileListFilterBtn = ({ offset, filter }) => (
-  <FileListNavBtn offset={offset} filter={filter} color="bg-blue-500">
+const FileListFilterBtn = ({ offset, filter, currentFilter }) => (
+  <FileListNavBtn
+    offset={offset}
+    filter={filter}
+    color={"bg-blue-500"}
+    disabled={filter === currentFilter}
+  >
     {filter}
   </FileListNavBtn>
 );
@@ -61,7 +66,11 @@ export default ({ files, offset, filter, canSyncMore }) => (
           >
             Prev
           </FileListNavBtn>
-          <FileListNavBtn offset={offset + 5} filter={filter} disabled={!canSyncMore}>
+          <FileListNavBtn
+            offset={offset + 5}
+            filter={filter}
+            disabled={!canSyncMore}
+          >
             Next
           </FileListNavBtn>
         </td>
@@ -69,10 +78,22 @@ export default ({ files, offset, filter, canSyncMore }) => (
       <tr>
         <td colSpan="2" className="border border-gray-400 text-center py-2">
           <span>Filter:</span>
-          <FileListFilterBtn offset={0} filter="ALL" />
-          <FileListFilterBtn offset={0} filter="FINISHED" />
-          <FileListFilterBtn offset={0} filter="PROCESSING" />
-          <FileListFilterBtn offset={0} filter="FAILED" />
+          <FileListFilterBtn offset={0} filter="ALL" currentFilter={filter} />
+          <FileListFilterBtn
+            offset={0}
+            filter="FINISHED"
+            currentFilter={filter}
+          />
+          <FileListFilterBtn
+            offset={0}
+            filter="PROCESSING"
+            currentFilter={filter}
+          />
+          <FileListFilterBtn
+            offset={0}
+            filter="FAILED"
+            currentFilter={filter}
+          />
         </td>
       </tr>
     </tfoot>
