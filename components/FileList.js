@@ -69,10 +69,10 @@ export default ({ files, offset, filter, canSyncMore }) => (
       <tr>
         <td colSpan="2" className="border border-gray-400 text-center py-2">
           <span>Filter:</span>
-          <FileListFilterBtn offset={offset} filter="ALL" />
-          <FileListFilterBtn offset={offset} filter="FINISHED" />
-          <FileListFilterBtn offset={offset} filter="PROCESSING" />
-          <FileListFilterBtn offset={offset} filter="FAILED" />
+          <FileListFilterBtn offset={0} filter="ALL" />
+          <FileListFilterBtn offset={0} filter="FINISHED" />
+          <FileListFilterBtn offset={0} filter="PROCESSING" />
+          <FileListFilterBtn offset={0} filter="FAILED" />
         </td>
       </tr>
     </tfoot>
