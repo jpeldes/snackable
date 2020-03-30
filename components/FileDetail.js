@@ -19,6 +19,9 @@ export default ({
         originalFilepath={originalFilepath}
       />
     )}
+
+    {segments && segments.length > 0 && <FileSegmentView segments={segments} />}
+
     <RawDataView
       fileId={fileId}
       fileName={fileName}
@@ -26,8 +29,6 @@ export default ({
       mp3Path={mp3Path}
       originalFilepath={originalFilepath}
     />
-
-    {segments && segments.length > 0 && <FileSegmentView segments={segments} />}
 
     <Link href="/files">
       <a className="text-sm text-blue-600 inline-block mt-5">
