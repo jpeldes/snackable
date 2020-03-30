@@ -31,10 +31,10 @@ export default ({ files, offset }) => (
     <tfoot>
       <tr>
         <td colSpan="2" className="text-center py-2">
-          <Link href={`/files?offset=${offset - 5}`}>
+          <Link href={`/files?offset=${offset - 5}`} as="/files">
             <a className="bg-gray-500 rounded text-white p-2 m-2">Prev</a>
           </Link>
-          <Link href={`/files?offset=${offset + 5}`}>
+          <Link href={`/files?offset=${offset + 5}`} as="/files">
             <a className="bg-gray-500 rounded text-white p-2 m-2">Next</a>
           </Link>
         </td>
